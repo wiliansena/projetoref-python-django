@@ -1,0 +1,13 @@
+  
+{% extends 'base.html' %}
+
+{% block title %}referencia: '{{ref.reference}}'{% endblock %}
+
+{% block content %}
+<div class="offset-1 col-10 list-div">
+    <h1>Referencia: {{ ref.reference }}</h1>
+    <p>Descriçao: {{ref.description}}</p>
+    <p>Cor: {{ref.color_text}}</p>
+    <p>Status: {{ref.status}}</p>
+</div>
+{% endblock %}

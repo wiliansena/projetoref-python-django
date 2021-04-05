@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Cores{% endblock %}
+{% block content %}
+<div class="offset-1 col-10 list-div">
+    <p class="title">Lista de cores</p>
+    <a id="add-link" href="newcolor/">
+        <div class="col-3 add-div">
+            <i class="fas fa-plus"></i>Adicionar Cor
+        </div>
+    </a>
+    <div class="col-9 search-div">
+        <form method="GET" id="search-form">
+            <input class="form-control" type="text" id="search" name="search" placeholder="Digite o nome da cor para buscar..." value="{{ request.GET.search }}">
+            <i class="fas fa-search" id="search-btn"></i>
+        </form>
+    </div>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li {% if message.tags %} class="alert alert-{{message.tags}}"{%endif%}>{{ message }}</li>
+        {%endfor%}
+{%endif%}
+    <ul class="color-list">
+        {% for color in colors %}
+        <li class="color-item">
+            <span><a href="color/{{color.id}}">{{color.color_text}}</a></span>
+            <a href="delete/{{color.id}}" class="delete-btn"><span><i class="fas fa-trash"></i></span></a>
+            <a href="edit/{{color.id}}"><span><i class="fas fa-edit"></i></span></a>
+        </li>
+        {%endfor%}
+    </ul>
+    <div class='pagination'>
+        <span class="step-links">
+            {% if colors.has_previous %}
+            <a href="?page={{colors.previous_page_number }}"><i class="fas fa-arrow-left"></i></a>
+            {%endif%}
+
+            {% if colors.paginator.num_pages %}
+            <span class="current">
+                {{ colors.number }} de {{ colors.paginator.num_pages }}    
+            </span>
+            {%endif%}
+            
+            {% if colors.has_next %}
+            <a href="?page={{colors.next_page_number }}"><i class="fas fa-arrow-right"></i></a>
+            {%endif%}
+
+
+        </span>
+
+    </div>
+</div>
+{% endblock %}
